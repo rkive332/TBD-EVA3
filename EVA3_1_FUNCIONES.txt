@@ -1,0 +1,121 @@
+MySQL Shell 8.0.43
+
+Copyright (c) 2016, 2025, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \c --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 16
+Server version: 8.0.43 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| creditcards        |
+| examenpractico_1   |
+| humanresources     |
+| information_schema |
+| mysql              |
+| orders             |
+| performance_schema |
+| prueba_tbd         |
+| sakila             |
+| sys                |
+| tbd1               |
+| tbd2               |
+| tbd3               |
+| world              |
++--------------------+
+14 rows in set (0.0010 sec)
+ MySQL  localhost:3306 ssl  SQL > USE tbd3;
+Default schema set to `tbd3`.
+Fetching global names, object names from `tbd3` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  tbd3  SQL > SELECT mensaje();
++-------------+
+| mensaje()   |
++-------------+
+| Hola mundo! |
++-------------+
+1 row in set (0.0143 sec)
+ MySQL  localhost:3306 ssl  tbd3  SQL > SELECT mostarMensaje("Valeria");
++--------------------------+
+| mostarMensaje("Valeria") |
++--------------------------+
+| HolaValeria              |
++--------------------------+
+1 row in set (0.0018 sec)
+ MySQL  localhost:3306 ssl  tbd3  SQL > SELECT sumar(5+3);
+ERROR: 1318 (42000): Incorrect number of arguments for FUNCTION tbd3.sumar; expected 2, got 1
+ MySQL  localhost:3306 ssl  tbd3  SQL > SELECT sumar(5,3);
++------------+
+| sumar(5,3) |
++------------+
+|          8 |
++------------+
+1 row in set (0.0009 sec)
+ MySQL  localhost:3306 ssl  tbd3  SQL > CREATE TABLE Datos(
+                                     -> valor1 INT,
+                                     -> valor2, INT);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', INT)' at line 3
+ MySQL  localhost:3306 ssl  tbd3  SQL > CREATE TABLE Datos( valor1 INT,  valor2 INT);
+Query OK, 0 rows affected (0.0379 sec)
+ MySQL  localhost:3306 ssl  tbd3  SQL > INSERT INTO Datos
+                                     -> VALUES (5,8), (5,6), (-8,-9);
+Query OK, 3 rows affected (0.0567 sec)
+
+Records: 3  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  tbd3  SQL > SELECT * FROM Datos;
++--------+--------+
+| valor1 | valor2 |
++--------+--------+
+|      5 |      8 |
+|      5 |      6 |
+|     -8 |     -9 |
++--------+--------+
+3 rows in set (0.0009 sec)
+ MySQL  localhost:3306 ssl  tbd3  SQL > SELECT valor1, valor2, sumar(valor1, valor2) FROM Datos;
++--------+--------+-----------------------+
+| valor1 | valor2 | sumar(valor1, valor2) |
++--------+--------+-----------------------+
+|      5 |      8 |                    13 |
+|      5 |      6 |                    11 |
+|     -8 |     -9 |                   -17 |
++--------+--------+-----------------------+
+3 rows in set (0.0010 sec)
+ MySQL  localhost:3306 ssl  tbd3  SQL > SELECT valor1, valor2, sumar2(valor1, valor2) FROM Datos;
++--------+--------+------------------------+
+| valor1 | valor2 | sumar2(valor1, valor2) |
++--------+--------+------------------------+
+|      5 |      8 |                     13 |
+|      5 |      6 |                     11 |
+|     -8 |     -9 |                    -17 |
++--------+--------+------------------------+
+3 rows in set (0.0020 sec)
+ MySQL  localhost:3306 ssl  tbd3  SQL > SELECT comparar(3,5);
++------------------------------+
+| comparar(3,5)                |
++------------------------------+
+| Valor 2 es MAYOR que Valor 1 |
++------------------------------+
+1 row in set (0.0017 sec)
+ MySQL  localhost:3306 ssl  tbd3  SQL > SELECT comparar(5,3);
++------------------------------+
+| comparar(5,3)                |
++------------------------------+
+| Valor 1 es MAYOR que Valor 2 |
++------------------------------+
+1 row in set (0.0009 sec)
+ MySQL  localhost:3306 ssl  tbd3  SQL > SELECT comparar(5,5);
++---------------------------+
+| comparar(5,5)             |
++---------------------------+
+| Ambos valores son IGUALES |
++---------------------------+
+1 row in set (0.0007 sec)
+ MySQL  localhost:3306 ssl  tbd3  SQL >

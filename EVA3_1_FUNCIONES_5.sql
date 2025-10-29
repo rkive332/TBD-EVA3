@@ -1,0 +1,9 @@
+DELIMITER $$
+CREATE FUNCTION sumar2(val1 INT, val2 INT)
+RETURNS INT DETERMINISTIC
+BEGIN
+	DECLARE suma INT;
+    SET suma = val1 + val2;
+    RETURN suma;
+END$$
+DELIMITER ;
