@@ -1,0 +1,131 @@
+MySQL Shell 8.0.43
+
+Copyright (c) 2016, 2025, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \c --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 20
+Server version: 8.0.43 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > USE tbd3;
+Default schema set to `tbd3`.
+Fetching global names, object names from `tbd3` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  tbd3  SQL > CALL agregar_Personas('Juan', 'Perez', 'Garcia', '1990-05-15');
+Query OK, 1 row affected (0.0195 sec)
+ MySQL  localhost:3306 ssl  tbd3  SQL > SELECT * FROM personas;
++------------+--------+------------+------------+------------+
+| RFC        | Nombre | Ap_Paterno | Ap_Materno | Fecha_Nac  |
++------------+--------+------------+------------+------------+
+| PEGJ900515 | Juan   | Perez      | Garcia     | 1990-05-15 |
+| TOAF040318 | Flor   | Torres     | Arroyo     | 2004-03-18 |
++------------+--------+------------+------------+------------+
+2 rows in set (0.0010 sec)
+ MySQL  localhost:3306 ssl  tbd3  SQL > SET @valor = 0;
+Query OK, 0 rows affected (0.0121 sec)
+ MySQL  localhost:3306 ssl  tbd3  SQL > SELECT @valor;
++--------+
+| @valor |
++--------+
+|      0 |
++--------+
+1 row in set (0.0020 sec)
+ MySQL  localhost:3306 ssl  tbd3  SQL > CALL calcular_cuadrado(8, @valor);
+ERROR: 1054 (42S22): Unknown column 'nume' in 'field list'
+ MySQL  localhost:3306 ssl  tbd3  SQL > CALL calcular_cuadrado(8, @valor);
+Query OK, 0 rows affected (0.0131 sec)
+ MySQL  localhost:3306 ssl  tbd3  SQL > SELECT @valor;
++--------+
+| @valor |
++--------+
+|     64 |
++--------+
+1 row in set (0.0007 sec)
+ MySQL  localhost:3306 ssl  tbd3  SQL > CREATE TABLE Prueba(
+                                     -> ID INT NOT NULL KEY,
+                                     -> ^C
+ MySQL  localhost:3306 ssl  tbd3  SQL > CREATE TABLE Prueba(
+                                     -> ID INT NOT NULL KEY);
+Query OK, 0 rows affected (0.0439 sec)
+ MySQL  localhost:3306 ssl  tbd3  SQL > INSERT INTO Prueba
+                                     -> VALUE (1), (2), (3);
+Query OK, 3 rows affected (0.0204 sec)
+
+Records: 3  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  tbd3  SQL > INSERT INTO Prueba VALUE (1);
+ERROR: 1062 (23000): Duplicate entry '1' for key 'prueba.PRIMARY'
+ MySQL  localhost:3306 ssl  tbd3  SQL > CALL insertar_prueba(4);
++-------------------------------+
+| mensaje                       |
++-------------------------------+
+| Clave insertada correctamente |
++-------------------------------+
+1 row in set (0.0161 sec)
+
+Query OK, 0 rows affected (0.0161 sec)
+ MySQL  localhost:3306 ssl  tbd3  SQL > CALL insertar_prueba();
+ERROR: 1318 (42000): Incorrect number of arguments for PROCEDURE tbd3.insertar_prueba; expected 1, got 0
+ MySQL  localhost:3306 ssl  tbd3  SQL > CALL insertar_prueba(4);
+ERROR: 1062 (23000): Duplicate entry '4' for key 'prueba.PRIMARY'
+ MySQL  localhost:3306 ssl  tbd3  SQL > CALL insertar_prueba(5);
++-------------------------------+
+| mensaje                       |
++-------------------------------+
+| Clave insertada correctamente |
++-------------------------------+
+1 row in set (0.0164 sec)
+
+Query OK, 0 rows affected (0.0164 sec)
+ MySQL  localhost:3306 ssl  tbd3  SQL > CALL insertar_prueba(5);
++------------------------+
+| mensaje_error          |
++------------------------+
+| Error: clave duplicada |
++------------------------+
+1 row in set (0.0010 sec)
+
+Query OK, 0 rows affected (0.0010 sec)
+ MySQL  localhost:3306 ssl  tbd3  SQL > CALL division(4,5);
+ERROR: 1054 (42S22): Unknown column 'val' in 'field list'
+ MySQL  localhost:3306 ssl  tbd3  SQL > CALL division(4,5);
++------------+
+| resu_final |
++------------+
+|       0.80 |
++------------+
+1 row in set (0.0014 sec)
+
+Query OK, 0 rows affected (0.0014 sec)
+ MySQL  localhost:3306 ssl  tbd3  SQL > CALL division(4,0);
+ERROR: 1365 (22012): Division by 0
+ MySQL  localhost:3306 ssl  tbd3  SQL > CALL division2(4,0);
++------------------------------------------+
+| mensaje                                  |
++------------------------------------------+
+| Error: División entre  cero no permitida |
++------------------------------------------+
+1 row in set (0.0017 sec)
+
+Query OK, 0 rows affected (0.0017 sec)
+ MySQL  localhost:3306 ssl  tbd3  SQL > CALL division2(4,0);
++------------------------------------------+
+| mensaje                                  |
++------------------------------------------+
+| Error: División entre  cero no permitida |
++------------------------------------------+
+1 row in set (0.0017 sec)
+
++------------+
+| resu_final |
++------------+
+|       NULL |
++------------+
+1 row in set (0.0017 sec)
+
+Query OK, 0 rows affected (0.0017 sec)
+ MySQL  localhost:3306 ssl  tbd3  SQL >
